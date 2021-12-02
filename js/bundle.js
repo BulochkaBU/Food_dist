@@ -661,7 +661,8 @@ window.addEventListener('DOMContentLoaded', () => {
     slides();
     cards();
     calc();
-    
+
+    // webpack
 
 });
 })();
