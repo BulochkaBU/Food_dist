@@ -1,14 +1,16 @@
-function slides(){
+import {getZero} from './timer';
+
+function slides({container, slide, nextArrow, prevArrow, totalCounter, currentCounter,wrapper, field}){
     // Slider
-    const sliderWapper = document.querySelector('.offer__slider-wrapper'),
+    const sliderWapper = document.querySelector(wrapper),
           width = window.getComputedStyle(sliderWapper).width,
-          slidesField = document.querySelector('.offer__slider-inner'),
-          sliders = sliderWapper.querySelectorAll('.offer__slide'),
-          total = document.querySelector('#total'),
-          current = document.querySelector('#current'),
-          arrowPrev = document.querySelector('.offer__slider-prev'),
-          arrowNext = document.querySelector('.offer__slider-next'),
-          slider = document.querySelector('.offer__slider');      
+          slidesField = document.querySelector(field),
+          sliders = sliderWapper.querySelectorAll(slide),
+          total = document.querySelector(totalCounter),
+          current = document.querySelector(currentCounter),
+          arrowPrev = document.querySelector(prevArrow),
+          arrowNext = document.querySelector(nextArrow),
+          slider = document.querySelector(container);      
 
     let slideIndex = 1;
     total.innerHTML = `<span id="total">${getZero(sliders.length)}</span>`;
@@ -141,4 +143,4 @@ function slides(){
     }
 }
 
-module.exports = slides;
+export default slides;

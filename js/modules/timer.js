@@ -1,6 +1,14 @@
-function timer(){
+function getZero(num){
+    if (num >= 0 && num < 10){
+        return `0${num}`;
+    } else {
+        return num;
+    }
+}
+
+function timer(timerSelector, deadline){
     // Timer
-    const deadline = '2022-01-01';
+
 
     function getTimeRemaining(endTime){
         const t = Date.parse(endTime) - Date.parse(new Date()), 
@@ -18,13 +26,7 @@ function timer(){
         };
     }
 
-    function getZero(num){
-        if (num >= 0 && num < 10){
-            return `0${num}`;
-        } else {
-            return num;
-        }
-    }
+
 
     function setClock(selector, endTime){
         const timer = document.querySelector(selector),
@@ -49,8 +51,9 @@ function timer(){
         }
     }
 
-    setClock('.timer', deadline);
+    setClock(timerSelector, deadline);
 
 }
 
-module.exports = timer;
+export default timer;
+export {getZero};

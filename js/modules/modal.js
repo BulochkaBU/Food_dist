@@ -1,42 +1,49 @@
-function modal(){
+function hideModal(modalSelector){
+    const modal = document.querySelector(modalSelector);
+
+    modal.classList.add('hide');
+    modal.classList.remove('show');   
+    document.body.style.overflow = ''; 
+}
+
+function openModal(modalSelector, timeOpenModal){
+    const modal = document.querySelector(modalSelector);
+
+    modal.classList.add('show');
+    modal.classList.remove('hide');
+    document.body.style.overflow = 'hidden';
+
+    console.log(timeOpenModal);
+    if (timeOpenModal){
+        clearInterval(timeOpenModal);
+    }
+
+}
+
+function modal(triggerSelector, modalSelector, timeOpenModal){
     // Modal
-    const modalOpen = document.querySelectorAll('[data-modal]');
-    const modal = document.querySelector('.modal');
+    const modalOpen = document.querySelectorAll(triggerSelector);
+    const modal = document.querySelector(modalSelector);
 
     modalOpen.forEach(etem => {
-        etem.addEventListener('click', openModal);
+        etem.addEventListener('click', () => openModal(modalSelector, timeOpenModal));
     });
 
     modal.addEventListener('click', (e) => {
         if (e.target === modal || e.target.getAttribute('data-close') == ""){
-            hideModal();
+            hideModal(modalSelector);
         }    
     });
 
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Escape' && modal.classList.contains('show')){
-            hideModal();
+            hideModal(modalSelector);
         }
     });
 
-    function hideModal(){
-        modal.classList.add('hide');
-        modal.classList.remove('show');   
-        document.body.style.overflow = ''; 
-    }
-
-    function openModal(){
-        modal.classList.add('show');
-        modal.classList.remove('hide');
-        document.body.style.overflow = 'hidden';
-        clearInterval(timeOpenModal);
-    }
-
-    const timeOpenModal = setTimeout(openModal, 50000);
-
     function showModalByScroll(){
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1){
-            openModal();
+            openModal(modalSelector, timeOpenModal);
             window.removeEventListener('scroll', showModalByScroll);
         }        
     }
@@ -44,4 +51,6 @@ function modal(){
     window.addEventListener('scroll', showModalByScroll);
 }
 
-module.exports = modal;
+export default modal;
+export {hideModal};
+export {openModal};
